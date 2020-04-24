@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -13,17 +13,17 @@
     "typescript": "^3.8.2"
   },
   "dependencies": {
-    "react-scripts": "^3.0.1",
-    "react-dom": "^16.12.0",
-    "react": "^16.12.0",
+    "@ant-design/icons": "latest",
     "antd": "4.1.4",
-    "@ant-design/icons": "latest"
+    "lodash": "^4.17.15",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "^3.0.1"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "description": null
+  ]
 }
