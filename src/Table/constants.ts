@@ -1,24 +1,29 @@
 import selectRenderer from './CellRenderers/Select';
+import { DataItem, SelectOption, TableColumnsEditable } from './types';
 
-export const columns = [
+export const columns: TableColumnsEditable<DataItem> = [
   {
     title: "name",
     dataIndex: "name",
     width: "30%",
-    editable: true,
     render: selectRenderer,
+    // custom property, doesn't exist on types declaration of antd
+    // that's why we extend TableColumn with it creating TableColumnsEditable
+    editable: true,
   },
   {
     title: "age",
-    dataIndex: "age"
+    dataIndex: "age",
+    editable: false,
   },
   {
     title: "address",
-    dataIndex: "address"
+    dataIndex: "address",
+    editable: false,
   }
 ];
 
-export const dataSource = [
+export const dataSource: DataItem[] = [
   {
     key: "0",
     name: '',
@@ -33,7 +38,7 @@ export const dataSource = [
   }
 ];
 
-export const options = [
+export const options: SelectOption[] = [
   {
     id: 0,
     name: "Lucy",

@@ -1,34 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 
 import { options } from '../constants';
+import { AdditionalProps, DataItem } from "../types";
 import SelectEditor from '../CellEditors/Select';
 
-export const EditableCell = ({
+export const EditableCell: React.FC<AdditionalProps<DataItem>> = ({
   editable,
-  children,
-  dataIndex,
   record,
+  dataIndex,
   handleSave,
+  children,
   ...restProps
 }) => {
-  const inputRef = useRef(null);
-  const [editing, setEditing] = useState(false);
+  // const selectRef = useRef<HTMLSelectElement>(null);
+  const [editing, setEditing] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (editing) {
-      // not really necessary
-      inputRef.current.focus();
-    }
-  }, [editing]);
+  const toggleEdit = (): void => setEditing(!editing);
 
-  const toggleEdit = () => setEditing(!editing);
-
-  const onSave = value => {
+  const onSave = (value: string): void => {
     // here we can inject any part of chosen option
     // because we have an access to option as a second argument in onSave
     // const value = get(option, 'data-option.name', '');
     const row = { ...record, [dataIndex]: value };
 
+    console.log(row);
     toggleEdit();
     handleSave(row);
   };
@@ -37,7 +32,7 @@ export const EditableCell = ({
 
   if (editable) {
     childNode = editing ? (
-      <SelectEditor inputRef={inputRef} options={options} onSelect={onSave} value={record[dataIndex]}/>
+      <SelectEditor options={options} onSelect={onSave} value={record[dataIndex]}/>
     ) : (
       <div onClick={toggleEdit}>
         {children}

@@ -9,6 +9,8 @@
   "name": "editable-cells-ant-design-demo",
   "main": "index.js",
   "devDependencies": {
+    "@types/react": "^16.9.34",
+    "@types/react-dom": "^16.9.6",
     "react-scripts": "1.0.0",
     "typescript": "^3.8.2"
   },

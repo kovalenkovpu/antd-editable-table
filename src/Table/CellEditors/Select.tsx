@@ -2,12 +2,13 @@ import React from "react";
 import Select from "antd/lib/select";
 
 import classes from './SelectEditor.module.css';
+import { SelectOption, SelectEditorProps } from '../types';
 
-const SelectEditor = ({ options, inputRef, onSelect, value, ...props }) =>
+const SelectEditor: React.FC<SelectEditorProps> = ({ options, onSelect, value, ...props }) =>
   (
     <Select
       className={classes.select}
-      ref={inputRef}
+      // ref={selectRef}
       onSelect={onSelect}
       value={value}
       // to set what to display as a chosen value (value/label)
@@ -15,7 +16,7 @@ const SelectEditor = ({ options, inputRef, onSelect, value, ...props }) =>
       {...props}
     >
       {
-        options.map(option => (
+        options.map((option: SelectOption): React.ReactNode => (
           <Select.Option
             key={option.id}
             value={option.name}
