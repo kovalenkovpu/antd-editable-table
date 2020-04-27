@@ -1,37 +1,33 @@
-// import React from 'react';
+import React from "react";
 import { ColumnProps } from 'antd/lib/table';
 
 export interface EditableRowProps {
-  // index: number;
-  key: string;
-  // record: DataItem;
-};
+  // row component might be extended with any additional props here
+}
 
+// the same as table 'row'
 export interface DataItem {
   key: string;
   name: string;
   age: string;
   address: string;
-};
+  salary: string;
+}
 
-// TODO: ColumnProps should contain editable prop
+// TODO: ColumnProps should (?) contain 'editable' prop
 //  but it doesn't
-// export interface TableColumn<T> extends ColumnProps<T> {
-export type TableColumn<T> = ColumnProps<T>;
-export type TableColumns<T> = ColumnProps<T>[];
-
-export type TableColumnEditable<T> = TableColumn<T> & {
+export type TableColumnEditable<T> = ColumnProps<T> & {
   editable: boolean;
   dataIndex: keyof T;
 };
 export type TableColumnsEditable<T> = TableColumnEditable<T>[];
 
-export type AdditionalProps<T> = {
-  editable: boolean;
+export type AdditionalCellProps<T> = {
   record: T;
+  editable?: boolean;
   dataIndex: keyof T;
-  handleSave: (row: T) => void;
-  // blabla: string;
+  handleSave: (record: T) => void;
+  // not clear why we need this prop to be passed, but doesn't work without
   children: React.ReactNode;
 };
 
@@ -39,11 +35,16 @@ export interface SelectOption {
   id: number;
   name: string;
   born: number;
-};
+}
 
-export interface SelectEditorProps {
-  options: SelectOption[];
-  // selectRef: React.RefObject<HTMLSelectElement>;
-  onSelect: (value: string) => void;
-  value: string;
-};
+// EDITORS
+export interface Editors {
+  [key: string]: React.ElementType;
+}
+
+export interface EditorsProps {
+  dataIndex: keyof DataItem;
+  record: DataItem;
+  toggleEdit: () => void;
+  handleSave: (record: DataItem) => void;
+}

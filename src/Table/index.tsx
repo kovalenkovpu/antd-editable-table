@@ -1,21 +1,22 @@
 import React from "react";
 import Table from "antd/lib/table";
 
+import { columns, dataSource } from './constants';
 import EditableCell from './TableCell';
 import EditableRow from './TableRow';
-import { columns, dataSource } from './constants';
-import { DataItem, TableColumnEditable, AdditionalProps } from './types';
+import classes from './Table.module.css';
+import { DataItem, TableColumnEditable, AdditionalCellProps } from './types';
 
 const components = {
   body: {
     row: EditableRow,
-    cell: EditableCell
+    cell: EditableCell,
   }
 };
 
 interface EditableTableState {
   dataSource: DataItem[];
-};
+}
 
 export default class EditableTable extends React.Component<{}, EditableTableState> {
   state = {
@@ -31,7 +32,7 @@ export default class EditableTable extends React.Component<{}, EditableTableStat
       ...col,
       // onCell is called to extend props for the cell
       // it's 'additionalProps' prop on Cell props level
-      onCell: (record: DataItem): AdditionalProps<DataItem> => ({
+      onCell: (record: DataItem): AdditionalCellProps<DataItem> => ({
         record,
         editable: col.editable,
         dataIndex: col.dataIndex,
@@ -50,7 +51,7 @@ export default class EditableTable extends React.Component<{}, EditableTableStat
     newData.splice(index, 1, row);
 
     this.setState({
-      dataSource: newData
+      dataSource: newData,
     });
 
     // setState(...) might be replaced with any other additional calls;
@@ -64,7 +65,7 @@ export default class EditableTable extends React.Component<{}, EditableTableStat
       <Table
         components={components}
         columns={this.columns}
-        rowClassName={() => "editable-row"}
+        rowClassName={classes.tableRow}
         dataSource={this.state.dataSource}
         bordered
       />

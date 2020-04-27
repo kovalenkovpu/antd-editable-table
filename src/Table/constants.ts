@@ -3,38 +3,47 @@ import { DataItem, SelectOption, TableColumnsEditable } from './types';
 
 export const columns: TableColumnsEditable<DataItem> = [
   {
-    title: "name",
+    title: "Name",
     dataIndex: "name",
     width: "30%",
+    // if it's needed to customize component for displaying data
     render: selectRenderer,
     // custom property, doesn't exist on types declaration of antd
     // that's why we extend TableColumn with it creating TableColumnsEditable
     editable: true,
   },
   {
-    title: "age",
+    title: "Age",
     dataIndex: "age",
     editable: false,
   },
   {
-    title: "address",
+    title: "Address",
     dataIndex: "address",
     editable: false,
+  },
+  {
+    title: "Salary",
+    dataIndex: "salary",
+    width: "20%",
+    editable: true,
   }
 ];
 
 export const dataSource: DataItem[] = [
   {
     key: "0",
-    name: '',
+    name: 'Jack',
     age: "32",
-    address: "London, Park Lane no. 0"
+    address: "London, Park Lane no. 0",
+    salary: '0',
   },
   {
     key: "1",
     name: '',
     age: "32",
-    address: "London, Park Lane no. 1"
+    address: "London, Park Lane no. 1",
+    salary: '0',
   }
 ];
 
