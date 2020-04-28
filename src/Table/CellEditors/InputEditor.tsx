@@ -1,9 +1,9 @@
 import React from "react";
 import Input from "antd/lib/input";
+import isNaN from "lodash/isNaN";
 
 import classes from './InputEditor.module.css';
 import { EditorsProps } from '../types';
-import isEmpty from "lodash/isEmpty";
 
 const InputEditor: React.FC<EditorsProps> = ({
   dataIndex,
@@ -19,7 +19,14 @@ const InputEditor: React.FC<EditorsProps> = ({
   ): void => {
     // Why currentTarget: https://github.com/DefinitelyTyped/DefinitelyTyped/pull/12239
     const { value } = event.currentTarget;
-    const row = { ...record, [dataIndex]: isEmpty(value) ? '0' : value };
+    const numberValue = Number(value);
+
+    if (isNaN(numberValue)) {
+      toggleEdit();
+      return;
+    }
+
+    const row = { ...record, [dataIndex]: numberValue };
 
     toggleEdit();
     handleSave(row);
@@ -34,7 +41,7 @@ const InputEditor: React.FC<EditorsProps> = ({
       className={classes.input}
       onPressEnter={onInputSave}
       onBlur={onInputSave}
-      defaultValue={record[dataIndex]}
+      defaultValue={Number(record[dataIndex])}
       ref={editorRef}
       {...props}
     />

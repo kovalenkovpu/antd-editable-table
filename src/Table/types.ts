@@ -11,7 +11,8 @@ export interface DataItem {
   name: string;
   age: string;
   address: string;
-  salary: string;
+  salary: number;
+  employed: boolean;
 }
 
 // TODO: ColumnProps should (?) contain 'editable' prop
@@ -38,8 +39,9 @@ export interface SelectOption {
 }
 
 // EDITORS
-export interface Editors {
-  [key: string]: React.ElementType;
+export type Editors = {
+  // https://github.com/microsoft/TypeScript/issues/24220#issuecomment-504285702
+  [key in keyof DataItem]?: React.ElementType;
 }
 
 export interface EditorsProps {

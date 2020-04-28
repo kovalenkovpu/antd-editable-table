@@ -31,7 +31,7 @@ const SelectEditor: React.FC<EditorsProps> = ({
     <Select
       className={classes.select}
       onSelect={onSave}
-      value={record[dataIndex]}
+      value={String(record[dataIndex])}
       // to set what to display as a chosen value (value/label)
       optionLabelProp="value"
       ref={editorRef}

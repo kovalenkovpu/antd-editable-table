@@ -1,4 +1,5 @@
 import selectRenderer from './CellRenderers/Select';
+import checkboxRenderer from './CellRenderers/Checkbox';
 import { DataItem, SelectOption, TableColumnsEditable } from './types';
 
 export const columns: TableColumnsEditable<DataItem> = [
@@ -27,6 +28,13 @@ export const columns: TableColumnsEditable<DataItem> = [
     dataIndex: "salary",
     width: "20%",
     editable: true,
+  },
+  {
+    title: "Employed",
+    dataIndex: "employed",
+    width: "10%",
+    render: checkboxRenderer,
+    editable: true,
   }
 ];
 
@@ -36,14 +44,16 @@ export const dataSource: DataItem[] = [
     name: 'Jack',
     age: "32",
     address: "London, Park Lane no. 0",
-    salary: '0',
+    salary: 0,
+    employed: false,
   },
   {
     key: "1",
-    name: '',
+    name: 'Andrew',
     age: "32",
     address: "London, Park Lane no. 1",
-    salary: '0',
+    salary: 0,
+    employed: true,
   }
 ];
 
