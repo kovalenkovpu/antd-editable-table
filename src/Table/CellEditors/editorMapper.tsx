@@ -18,9 +18,7 @@ export const editorMapper = (props: EditorsProps): React.ReactNode => {
     return null;
   }
 
-  const Editor = Component;
-
   return (
-    <Editor {...props} />
+    <Component {...props} />
   );
 };
