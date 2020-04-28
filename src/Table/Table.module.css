@@ -1,3 +1,7 @@
+.table :global(.ant-table-cell) {
+  padding: 10px;
+}
+
 .tableRow {
   background-color: aquamarine;
 }

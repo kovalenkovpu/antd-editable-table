@@ -1,7 +1,7 @@
 import React from "react";
 
-import { AdditionalCellProps, DataItem } from "../types";
 import { editorMapper } from '../CellEditors/editorMapper';
+import { AdditionalCellProps, DataItem } from "../types";
 
 export const EditableCell: React.FC<AdditionalCellProps<DataItem>> = ({
   editable,
@@ -11,9 +11,7 @@ export const EditableCell: React.FC<AdditionalCellProps<DataItem>> = ({
   children,
   ...restProps
 }) => {
-  // const selectRef = useRef<HTMLSelectElement>(null);
   const [editing, setEditing] = React.useState<boolean>(false);
-
   const toggleEdit = (): void => setEditing(!editing);
 
   let childNode = children;

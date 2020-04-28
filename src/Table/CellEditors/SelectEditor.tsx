@@ -12,6 +12,7 @@ const SelectEditor: React.FC<EditorsProps> = ({
   handleSave,
   ...props
 }) => {
+  const editorRef = React.useRef<Select<string>>(null);
   const onSave = (value: string): void => {
     // here we can inject any part of chosen option
     // because we have an access to option as a second argument in onSave
@@ -22,6 +23,10 @@ const SelectEditor: React.FC<EditorsProps> = ({
     handleSave(row);
   };
 
+  React.useEffect(() => {
+    editorRef.current?.focus();
+  }, []);
+
   return (
     <Select
       className={classes.select}
@@ -29,6 +34,7 @@ const SelectEditor: React.FC<EditorsProps> = ({
       value={record[dataIndex]}
       // to set what to display as a chosen value (value/label)
       optionLabelProp="value"
+      ref={editorRef}
       {...props}
     >
       {

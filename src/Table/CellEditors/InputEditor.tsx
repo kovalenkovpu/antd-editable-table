@@ -12,6 +12,7 @@ const InputEditor: React.FC<EditorsProps> = ({
   handleSave,
   ...props
 }) => {
+  const editorRef = React.useRef<Input>(null);
   const onInputSave = (
     event: React.KeyboardEvent<HTMLInputElement>
       | React.FocusEvent<HTMLInputElement>
@@ -24,12 +25,17 @@ const InputEditor: React.FC<EditorsProps> = ({
     handleSave(row);
   };
 
+  React.useEffect(() => {
+    editorRef.current?.focus();
+  }, []);
+
   return (
     <Input
       className={classes.input}
       onPressEnter={onInputSave}
       onBlur={onInputSave}
       defaultValue={record[dataIndex]}
+      ref={editorRef}
       {...props}
     />
   );

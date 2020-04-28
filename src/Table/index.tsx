@@ -63,6 +63,7 @@ export default class EditableTable extends React.Component<{}, EditableTableStat
   render() {
     return (
       <Table
+        className={classes.table}
         components={components}
         columns={this.columns}
         rowClassName={classes.tableRow}
