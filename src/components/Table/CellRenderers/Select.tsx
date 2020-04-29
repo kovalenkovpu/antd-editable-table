@@ -1,5 +1,5 @@
-import React from "react";
-import Select from "antd/lib/select";
+import React from 'react';
+import Select from 'antd/lib/select';
 
 import classes from './Renderers.module.css';
 

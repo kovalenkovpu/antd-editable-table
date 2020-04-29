@@ -1,11 +1,16 @@
-import React from "react";
-import Table from "antd/lib/table";
+import React from 'react';
+import Table from 'antd/lib/table';
 
-import { columns, dataSource } from './constants';
+import {
+  TableColumnEditable,
+  TableColumnsEditable,
+  AdditionalCellProps,
+  CommonDataItemType,
+  Editors,
+} from 'src/types/Table';
 import EditableCell from './TableCell';
 import EditableRow from './TableRow';
 import classes from './Table.module.css';
-import { DataItem, TableColumnEditable, AdditionalCellProps } from './types';
 
 const components = {
   body: {
@@ -14,16 +19,22 @@ const components = {
   }
 };
 
-interface EditableTableState {
-  dataSource: DataItem[];
+interface EditableTableProps<D> {
+  columns: TableColumnsEditable<D>;
+  data: Array<D>;
+  editors: Editors<D>;
 }
 
-export default class EditableTable extends React.Component<{}, EditableTableState> {
+interface EditableTableState<D> {
+  dataSource: Array<D>;
+}
+
+export default class EditableTable<D extends CommonDataItemType> extends React.Component<EditableTableProps<D>, EditableTableState<D>> {
   state = {
-    dataSource,
+    dataSource: this.props.data,
   };
 
-  columns = columns.map((col: TableColumnEditable<DataItem>) => {
+  columns = this.props.columns.map((col: TableColumnEditable<D>) => {
     if (!col.editable) {
       return col;
     }
@@ -32,7 +43,7 @@ export default class EditableTable extends React.Component<{}, EditableTableStat
       ...col,
       // onCell is called to extend props for the cell
       // it's 'additionalProps' prop on Cell props level
-      onCell: (record: DataItem): AdditionalCellProps<DataItem> => ({
+      onCell: (record: D): AdditionalCellProps<D> => ({
         record,
         editable: col.editable,
         dataIndex: col.dataIndex,
@@ -40,11 +51,12 @@ export default class EditableTable extends React.Component<{}, EditableTableStat
 
         // not clear why we need this prop to be passed, but doesn't work without
         children: col.children,
+        editors: this.props.editors,
       }),
     };
   });
 
-  handleSave = (row: DataItem): void => {
+  handleSave = (row: D): void => {
     const newData = [...this.state.dataSource];
     const index = newData.findIndex(({ key }) => row.key === key);
 

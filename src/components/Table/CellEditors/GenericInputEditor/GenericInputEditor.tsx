@@ -1,17 +1,18 @@
-import React from "react";
-import Input from "antd/lib/input";
-import isNaN from "lodash/isNaN";
+import React from 'react';
+import Input from 'antd/lib/input';
+import isNaN from 'lodash/isNaN';
 
 import classes from './InputEditor.module.css';
-import { EditorsProps } from '../types';
+import { EditorsProps } from '../../../../types/Table';
 
-const InputEditor: React.FC<EditorsProps> = ({
-  dataIndex,
-  record,
-  toggleEdit,
-  handleSave,
-  ...props
-}) => {
+export const GenericInputEditor = <D,>(props: EditorsProps<D>) => {
+  const {
+    dataIndex,
+    record,
+    toggleEdit,
+    handleSave,
+    ...restProps
+  } = props;
   const editorRef = React.useRef<Input>(null);
   const onInputSave = (
     event: React.KeyboardEvent<HTMLInputElement>
@@ -43,9 +44,7 @@ const InputEditor: React.FC<EditorsProps> = ({
       onBlur={onInputSave}
       defaultValue={Number(record[dataIndex])}
       ref={editorRef}
-      {...props}
+      {...restProps}
     />
   );
 };
-
-export default InputEditor;

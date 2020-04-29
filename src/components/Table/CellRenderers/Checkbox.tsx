@@ -1,5 +1,5 @@
-import React from "react";
-import Checkbox from "antd/lib/checkbox";
+import React from 'react';
+import Checkbox from 'antd/lib/checkbox';
 
 import classes from './Renderers.module.css';
 

@@ -1,16 +1,17 @@
-import React from "react";
-import Checkbox, {CheckboxChangeEvent} from "antd/lib/checkbox";
+import React from 'react';
+import Checkbox, { CheckboxChangeEvent } from 'antd/lib/checkbox';
 
-import classes from './InputEditor.module.css';
-import { EditorsProps } from '../types';
+import { EditorsProps } from 'src/types/Table';
+import classes from '../GenericInputEditor/InputEditor.module.css';
 
-const CheckboxEditor: React.FC<EditorsProps> = ({
-  dataIndex,
-  record,
-  toggleEdit,
-  handleSave,
-  ...props
-}) => {
+export const GenericCheckboxEditor = <D,>(props: EditorsProps<D>) => {
+  const {
+    dataIndex,
+    record,
+    toggleEdit,
+    handleSave,
+    ...restProps
+  } = props;
   const editorRef = React.useRef<Checkbox>(null);
   const onCheckboxValueChange = (checked: boolean) => {
     const row = { ...record, [dataIndex]: checked };
@@ -35,9 +36,7 @@ const CheckboxEditor: React.FC<EditorsProps> = ({
       onChange={onCheck}
       checked={Boolean(record[dataIndex])}
       ref={editorRef}
-      {...props}
+      {...restProps}
     />
   );
 };
-
-export default CheckboxEditor;

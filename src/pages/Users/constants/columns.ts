@@ -1,6 +1,7 @@
-import selectRenderer from './CellRenderers/Select';
-import checkboxRenderer from './CellRenderers/Checkbox';
-import { DataItem, SelectOption, TableColumnsEditable } from './types';
+import { TableColumnsEditable } from '../../../types/Table';
+import { DataItem } from '../../../types/Users';
+import selectRenderer from '../../../components/Table/CellRenderers/Select';
+import checkboxRenderer from '../../../components/Table/CellRenderers/Checkbox';
 
 export const columns: TableColumnsEditable<DataItem> = [
   {
@@ -35,47 +36,5 @@ export const columns: TableColumnsEditable<DataItem> = [
     width: "10%",
     render: checkboxRenderer,
     editable: true,
-  }
-];
-
-export const dataSource: DataItem[] = [
-  {
-    key: "0",
-    name: 'Jack',
-    age: "32",
-    address: "London, Park Lane no. 0",
-    salary: 0,
-    employed: false,
-  },
-  {
-    key: "1",
-    name: 'Andrew',
-    age: "32",
-    address: "London, Park Lane no. 1",
-    salary: 0,
-    employed: true,
-  }
-];
-
-export const options: SelectOption[] = [
-  {
-    id: 0,
-    name: "Lucy",
-    born: 1986
-  },
-  {
-    id: 1,
-    name: "Jack",
-    born: 1976
-  },
-  {
-    id: 2,
-    name: "Nick",
-    born: 1966
-  },
-  {
-    id: 3,
-    name: "Andrew",
-    born: 1956
   }
 ];
