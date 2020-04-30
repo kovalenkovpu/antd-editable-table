@@ -3,7 +3,6 @@ import React from 'react';
 import { AdditionalCellProps } from 'src/types/Table';
 import { editorMapper } from '../CellEditors/editorMapper';
 
-// TS Issue: https://github.com/microsoft/TypeScript/issues/15713#issuecomment-499474386
 export const EditableCell = <D, O>(props: AdditionalCellProps<D>) => {
   const {
     editable,

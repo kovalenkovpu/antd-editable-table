@@ -34,7 +34,9 @@ export type Editors<T> = {
   [key in keyof T]?: React.ElementType;
 }
 
-export interface EditorsProps<D, O = {}> {
+// D - generic type for Data record
+// O - generic type for Option for Select component
+export interface EditorsProps<D, O> {
   dataIndex: keyof D;
   record: D;
   toggleEdit: () => void;
@@ -42,7 +44,7 @@ export interface EditorsProps<D, O = {}> {
   editors: Editors<D>;
 }
 
-export interface GenericSelectorEditorsProps<D, O> extends EditorsProps<D, O> {
+export interface GenericSelectorEditorsProps<D, O> extends EditorsProps<D, O > {
   // comes from entity-specific editor
   options: Array<O>;
   optionLabelProp: 'value' | 'label';

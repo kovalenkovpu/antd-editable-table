@@ -22,20 +22,16 @@ const components = {
 interface EditableTableProps<D> {
   columns: TableColumnsEditable<D>;
   data: Array<D>;
+  editable: boolean;
   editors: Editors<D>;
+  updateTableData: (row: D) => void;
 }
 
-interface EditableTableState<D> {
-  dataSource: Array<D>;
-}
-
-export default class EditableTable<D extends CommonDataItemType> extends React.Component<EditableTableProps<D>, EditableTableState<D>> {
-  state = {
-    dataSource: this.props.data,
-  };
-
+export default class EditableTable<D extends CommonDataItemType> extends React.Component<EditableTableProps<D>, {}> {
   columns = this.props.columns.map((col: TableColumnEditable<D>) => {
-    if (!col.editable) {
+    const { editable, editors } = this.props;
+
+    if (!col.editable || !editable) {
       return col;
     }
 
@@ -48,28 +44,16 @@ export default class EditableTable<D extends CommonDataItemType> extends React.C
         editable: col.editable,
         dataIndex: col.dataIndex,
         handleSave: this.handleSave,
+        editors,
 
         // not clear why we need this prop to be passed, but doesn't work without
         children: col.children,
-        editors: this.props.editors,
       }),
     };
   });
 
   handleSave = (row: D): void => {
-    const newData = [...this.state.dataSource];
-    const index = newData.findIndex(({ key }) => row.key === key);
-
-    newData.splice(index, 1, row);
-
-    this.setState({
-      dataSource: newData,
-    });
-
-    // setState(...) might be replaced with any other additional calls;
-    // e.g. for storing data on redux level:
-    // this.props.onCellEdit();
-    // which should trigger appropriate action-thunk-dispatch chain
+    this.props.updateTableData(row);
   };
 
   render() {
@@ -79,7 +63,7 @@ export default class EditableTable<D extends CommonDataItemType> extends React.C
         components={components}
         columns={this.columns}
         rowClassName={classes.tableRow}
-        dataSource={this.state.dataSource}
+        dataSource={this.props.data}
         bordered
       />
     );

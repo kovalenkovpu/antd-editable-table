@@ -1,4 +1,7 @@
+import { ConnectedProps } from 'react-redux';
+
 import { CommonDataItemType, TableColumnsEditable } from './Table';
+import { connector } from 'src/pages/Users';
 
 export interface DataItem extends CommonDataItemType {
   name: string;
@@ -8,7 +11,14 @@ export interface DataItem extends CommonDataItemType {
   employed: boolean;
 }
 
-export type StateProps = {
+export interface StateProps {
   columns: TableColumnsEditable<DataItem>;
   data: DataItem[];
-};
+}
+
+export interface DispatchProps {
+  getTableData: () => Promise<void>;
+  updateTableData: (row: DataItem) => void;
+}
+
+export type ConnectedUsersPageProps = ConnectedProps<typeof connector>;

@@ -48,8 +48,6 @@ export const GenericSelectEditor = <D, O>(props: GenericSelectorEditorsProps<D, 
       {
         options.map((option: O) => (
           <Select.Option
-            // key={option[optionKey]}
-            // value={option[optionValue]}
             key={get(option, optionKey, '')}
             value={get(option, optionValue, '')}
             // under question, maybe we can do it in more elegant way

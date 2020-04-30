@@ -1,7 +1,7 @@
-import { TableColumnsEditable } from '../../../types/Table';
-import { DataItem } from '../../../types/Users';
-import selectRenderer from '../../../components/Table/CellRenderers/Select';
-import checkboxRenderer from '../../../components/Table/CellRenderers/Checkbox';
+import { TableColumnsEditable } from 'src/types/Table';
+import { DataItem } from 'src/types/Users';
+import selectRenderer from 'src/components/Table/CellRenderers/Select';
+import checkboxRenderer from 'src/components/Table/CellRenderers/Checkbox';
 
 export const columns: TableColumnsEditable<DataItem> = [
   {
